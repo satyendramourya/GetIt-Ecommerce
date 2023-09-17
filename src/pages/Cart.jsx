@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 import { makePayment } from "../api/stripe";
 
 import CartItem from "../components/CartItem"
+import { emptyCart } from "../redux/getItSlice";
 
 const Cart = () => {
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
   const productData = useSelector((state) => state.getIt.productData)
   const userInfo = useSelector(state => state.getIt.userInfo)
 
   const [totalAmount, setTotalAmount] = useState(0);
-  // const [payNow, setPayNow] = useState(false);
+
 
   // handeling amount onproduct quantity change, add and remove
   useEffect(() => {
@@ -28,16 +29,14 @@ const Cart = () => {
     setTotalAmount(total.toFixed(2));
   }, [productData])
 
-
-
-
   
   // handeling checkout
-  const handleCheckout = () => {
+  const handleCheckout = async() => {
     if (userInfo) {
       // implement stripe payment here
-      makePayment(productData);
-      toast.success('Payment successfull');
+      await makePayment(productData);
+      dispatch(emptyCart());
+      toast.success('Payment successful');
       
     } else {
       toast.error('Please login first');

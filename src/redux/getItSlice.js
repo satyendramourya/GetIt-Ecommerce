@@ -53,6 +53,16 @@ export const getItSlice = createSlice({
         removeUser: (state) => {
             state.userInfo = null;
         },
+
+        //empty cart
+        emptyCart: (state) => {
+            state.productData = [];
+        },
+
+        //order history
+        addToOrderHistory: (state, action) => {
+            state.cartOrderHistory.push(action.payload);
+        },
     }
 })
 
@@ -64,6 +74,8 @@ export const {
     decrementQuantity,
     addUser,
     removeUser,
+    emptyCart,
+    addToOrderHistory,
     
 } = getItSlice.actions;
 export default getItSlice.reducer;
