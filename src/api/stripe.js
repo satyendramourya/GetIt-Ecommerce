@@ -13,7 +13,7 @@ export  const makePayment = async (productData) => {
       "Content-Type": "application/json",
     }
 
-    const response = await fetch("http://localhost:7000/api/payment", {
+    const response = await fetch(`${process.env.REACT_APP_API_SERVER}/api/payment`, {
       method: "POST",
       headers,
       body: JSON.stringify(body),
