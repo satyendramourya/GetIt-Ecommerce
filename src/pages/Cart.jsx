@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 
 import { makePayment } from "../api/stripe";
@@ -10,7 +10,7 @@ import CartItem from "../components/CartItem"
 
 const Cart = () => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 
   const productData = useSelector((state) => state.getIt.productData)
@@ -38,7 +38,6 @@ const Cart = () => {
       // implement stripe payment here
       makePayment(productData);
       toast.success('Payment successfull');
-      dispatch()
       
     } else {
       toast.error('Please login first');
