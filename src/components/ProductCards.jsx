@@ -34,7 +34,7 @@ const ProductCards = ({ product }) => {
   // product card UI 
   return (
     <div className='group relative m-2 '>
-      <div onClick={handleDetails} className='w-full h-96 cursor-pointer overflow-hidden'>
+      <div onClick={handleDetails} className='w-full md:h-96 object-contain cursor-pointer overflow-hidden'>
         <img
           className='w-full rounded-t-md md:h-full  group-hover:scale-110 duration-500 '
           src={product.image} alt="img" />
@@ -46,7 +46,7 @@ const ProductCards = ({ product }) => {
           </div>
           <div>
             <div className='flex gap-2 justify-end relative overflow-hidden w-28 text-sm'>
-              <div className='flex gap-2 transform group-hover:translate-x-24 transition-transform duration-500'>
+              <div className='flex gap-2 lg:transform lg:group-hover:translate-x-24 transition-transform duration-500 pr-4 lg:p-0'>
                 <p className='line-through text-gray-500'>${product.oldPrice}</p>
                 <p className='font-semibold'>${product.price}</p>
               </div>
@@ -61,7 +61,7 @@ const ProductCards = ({ product }) => {
 
               })) & toast.success(`${product.title} Added to cart`)
               
-              } className='absolute z20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-500'>
+              } className='hidden absolute z20 w-[100px] text-gray-500 hover:text-gray-900 lg:flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-500'>
                 add to cart <span><BsArrowRight /></span>
               </p>
 
@@ -69,8 +69,23 @@ const ProductCards = ({ product }) => {
           </div>
 
         </div>
-        <div>
+        <div className='flex justify-between pr-3'>
           <p>{product.category}</p>
+          <button onClick={() => dispatch(addToCart({
+            _id: product._id,
+            title: product.title,
+            image: product.image,
+            price: product.price,
+            oldPrice: product.oldPrice,
+            quantity: 1,
+            description: product.description
+
+          })) & toast.success(`${product.title} Added to cart`)
+
+          } className=' bg-gray-900 p-2  text-sm font-titlFont lg:hidden text-white hover:text-gray-300 flex items-center gap-1 rounded-md active:scale-95  cursor-pointer'>
+            add to cart <span><BsArrowRight /></span>
+          </button>
+
         </div>
         <div className='absolute top-4 right-0'>
           {product.isNew && <p className='bg-black text-white font-semibold font-titlFont px-6 py-1'>Sale</p>}

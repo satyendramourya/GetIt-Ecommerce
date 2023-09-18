@@ -76,7 +76,7 @@ const ProductDetails = () => {
                 &
                setBaseQty(1) 
               }
-              className='bg-black text-white py-3 px-6 active:bg-gray-800' >add to cart</button>
+              className='bg-black rounded-md active:scale-95 text-white py-3 px-6 active:bg-gray-800' >add to cart</button>
           </div>
           <p>Category: <span className='font-medium capitalize'> {details.category}</span></p>
         </div>
