@@ -27,6 +27,12 @@ export const getItSlice = createSlice({
             );
         },
 
+        deleteHistoryItem: (state, action) => { 
+            state.cartOrderHistory = state.cartOrderHistory.filter(
+                (item) => item._id !== action.payload
+            );
+        },
+
         resetCart: (state) => {
             state.productData = [];
         },
@@ -61,7 +67,8 @@ export const getItSlice = createSlice({
 
         //order history
         addToOrderHistory: (state, action) => {
-            state.cartOrderHistory.push(action.payload);
+            state.cartOrderHistory = state.productData;
+            state.productData = [];
         },
     }
 })
@@ -76,6 +83,7 @@ export const {
     removeUser,
     emptyCart,
     addToOrderHistory,
+    deleteHistoryItem,
     
 } = getItSlice.actions;
 export default getItSlice.reducer;

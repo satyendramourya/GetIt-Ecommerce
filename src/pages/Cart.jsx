@@ -2,23 +2,21 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { addToOrderHistory, emptyCart } from '../redux/getItSlice';
+
 
 
 import { makePayment } from "../api/stripe";
 
 import CartItem from "../components/CartItem"
-import { emptyCart } from "../redux/getItSlice";
+// import { emptyCart } from "../redux/getItSlice";
 
 const Cart = () => {
 
   const dispatch = useDispatch();
-
-
   const productData = useSelector((state) => state.getIt.productData)
   const userInfo = useSelector(state => state.getIt.userInfo)
-
   const [totalAmount, setTotalAmount] = useState(0);
-
 
   // handeling amount onproduct quantity change, add and remove
   useEffect(() => {
@@ -29,18 +27,28 @@ const Cart = () => {
     setTotalAmount(total.toFixed(2));
   }, [productData])
 
-  
   // handeling checkout
-  const handleCheckout = async() => {
+  const handleCheckout = () => {
     if (userInfo) {
-      // implement stripe payment here
-      await makePayment(productData);
-      dispatch(emptyCart());
-      toast.success('Payment successful');
+      try {
+        // Implement Stripe payment here using your makePayment function
+        makePayment(productData);
+
+        // Dispatch an action to add the order to history
+        dispatch(addToOrderHistory({ products: productData, totalAmount }));
+
+        // Dispatch an action to empty the cart
+        dispatch(emptyCart());
+      } catch (error) {
+        // Handle any payment errors here
+        console.error('Payment error:', error);
+        toast.error('Payment failed. Please try again.');
+      }
       
     } else {
       toast.error('Please login first');
     }
+    
   }
 
   return (

@@ -13,9 +13,22 @@ const CartItem = () => {
 
   return (
     <div className=' w-full lg:w-2/3 p-2 lg:p-5'>
-      <div className='w-full'>
+      <div className='w-full flex justify-between p-3 items-center'>
         <h2 className='font-titlFont text-2xl'>shopping cart</h2>
+        <Link to='/orderHistory'>
+          <h3 className='font-titlFont text-red-600 font-semibold cursor-pointer '>order history</h3>
+        </Link>
       </div>
+
+      {
+        productData.length === 0 && <div className='flex flex-col items-center justify-center mt-10'>
+          <h2 className='font-titlFont text-2xl'>cart is empty</h2>
+          <MdOutlineClose className='text-6xl text-gray-400' />
+          <p className='text-sm'>Go shopping</p>
+        </div>
+      }
+
+
       <div>
         {
           productData.map((item) => (
@@ -104,12 +117,19 @@ const CartItem = () => {
             go shopping
           </button>
         </Link>
-        <button
-          onClick={() => dispatch(
-            resetCart()) & toast.error('Cart Reset')
-          }
-          className='bg-red-500 text-white mt-8 ml-7 py-1
-      px-6 hover:bg-red-800 duration-300'>Reset Cart</button>
+
+        {
+          productData.length > 0 && <button
+            onClick={() => dispatch(
+              resetCart()) & toast.error('Cart Reset')
+            }
+            className='bg-red-500 text-white mt-8 ml-7 py-1
+          px-6 hover:bg-red-800 duration-300'>
+            Reset Cart
+
+          </button>
+        }
+        
 
       </div>
 
