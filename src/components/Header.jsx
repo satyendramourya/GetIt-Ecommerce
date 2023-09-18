@@ -21,10 +21,12 @@ const Header = () => {
                 </Link>
                 <div className='flex items-center gap-2 md:gap-8'>
                     <ul className=' hidden lg:flex items-center gap-8'>
-                        <li className='text-base text-black font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300'>Home</li>
-                        <li className='text-base text-black font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300'>Pages</li>
-                        <li className='text-base text-black font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300'>Shop</li>
-                        <li className='text-base text-black font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300'>Blog</li>
+                        <Link to='/'>
+                            <li className='text-base text-black font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300'>Home</li>
+                        </Link>
+                        <Link to='/orderHistory'>
+                            <li className='text-base text-black font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300'>Order history</li>
+                        </Link>
                     </ul>
                     <Link to='/cart'>
                         <div className='relative'>
