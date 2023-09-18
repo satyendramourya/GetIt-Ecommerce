@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { MdOutlineClose } from 'react-icons/md'
 import { deleteHistoryItem } from '../redux/getItSlice'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 
 const OrderHistory = () => {
@@ -81,6 +81,18 @@ const OrderHistory = () => {
                   </button>
               </Link>
           </div>
+          <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={true}
+              rtl={false}
+              pauseOnFocusLoss={true}
+              draggable={true}
+              pauseOnHover={false}
+              theme='dark'
+          />
       </div >
   )
 }
